@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<title>TheCodePal Train</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<style>
+			body {
+				text-align: center;
+			}
+			textarea, input {
+				margin-top: 10px;
+			}
+		</style>
+		<script src='https://cdn.firebase.com/js/client/2.4.0/firebase.js'></script>
+		<script>
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyAgQEgLFw98_5EgV7UbY_AcqlzkN66iyys",
+				authDomain: "thecodepal.firebaseapp.com",
+				databaseURL: "https://thecodepal.firebaseio.com",
+				projectId: "thecodepal",
+				storageBucket: "",
+				messagingSenderId: "646295452079"
+			};
+			firebase.initializeApp(config);
+		</script>
+	</head>
+	<body>
+		<h3>TheCodePal Training Page</h3>
+		<form action="javascript:send()">
+			<textarea id="snippet" placeholder="paste snippet here"></textarea><br>
+			<input id="keys" placeholder="type in keyword"><br>
+			<input type="submit" value="Send Data">
+		</form>
+		<script>
+			var snippetPort = new Firebase('https://thecodepal.firebaseio.com');
+			function send() {
+				var snippet = document.getElementById("snippet").value;
+				var key = document.getElementById("keys").value;
+				snippetPort.push({snippet:snippet, key:key});
+				document.getElementById("snippet").value = "";
+				document.getElementById("keys").value = "";
+			}
+		</script>
+	</body>
+</html>
